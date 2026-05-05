@@ -13,20 +13,31 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
-        // default pertama kali buka
-        loadFragment(HomeFragment())
+        // Load default fragment hanya pertama kali
+        if (savedInstanceState == null) {
+            replaceFragment(HomeFragment())
+        }
 
-        bottomNav.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.nav_home -> loadFragment(HomeFragment())
-                R.id.nav_search -> loadFragment(SearchFragment())
-                R.id.nav_profile -> loadFragment(ProfileFragment())
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    replaceFragment(HomeFragment())
+                    true
+                }
+                R.id.nav_search -> {
+                    replaceFragment(SearchFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    replaceFragment(ProfileFragment())
+                    true
+                }
+                else -> false
             }
-            true
         }
     }
 
-    private fun loadFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameContainer, fragment)
             .commit()

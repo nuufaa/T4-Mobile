@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText android:id="@+id/etName" android:hint="Nama"/>
+    <EditText android:id="@+id/etNim" android:hint="NIM"/>
+    <EditText android:id="@+id/etEmail" android:hint="Email"/>
+    <EditText android:id="@+id/etProdi" android:hint="Prodi"/>
+    <EditText android:id="@+id/etSemester" android:hint="Semester" android:inputType="number"/>
+
+    <Button
+        android:id="@+id/btnSave"
+        android:text="Simpan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

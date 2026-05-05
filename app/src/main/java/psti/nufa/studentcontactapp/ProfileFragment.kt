@@ -1,59 +1,59 @@
 package psti.nufa.studentcontactapp
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.*
+import android.widget.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import psti.nufa.studentcontactapp.utils.PrefManager
+import psti.nufa.studentcontactapp.utils.SettingsManager
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var prefManager: PrefManager
+    private lateinit var settingsManager: SettingsManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        prefManager = PrefManager(requireContext())
+        settingsManager = SettingsManager(requireContext())
+
+        val tvUsername = view.findViewById<TextView>(R.id.tvUsername)
+        val switchDark = view.findViewById<Switch>(R.id.switchDarkMode)
+        val switchNotif = view.findViewById<Switch>(R.id.switchNotification)
+        val btnLogout = view.findViewById<Button>(R.id.btnLogout)
+
+        // TAMPILKAN USERNAME
+        val username = prefManager.getUsername()
+        tvUsername.text = "Username: $username"
+
+        // SET STATUS AWAL DARK MODE
+        switchDark.isChecked = settingsManager.isDarkMode
+
+        // SET STATUS AWAL NOTIFICATION
+        switchNotif.isChecked = settingsManager.isNotificationEnabled
+
+        // LISTENER DARK MODE
+        switchDark.setOnCheckedChangeListener { _, isChecked ->
+            settingsManager.isDarkMode = isChecked
+            Toast.makeText(requireContext(), "Dark Mode: $isChecked", Toast.LENGTH_SHORT).show()
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
-    }
+        // LISTENER NOTIFICATION
+        switchNotif.setOnCheckedChangeListener { _, isChecked ->
+            settingsManager.isNotificationEnabled = isChecked
+            Toast.makeText(requireContext(), "Notification: $isChecked", Toast.LENGTH_SHORT).show()
+        }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        // 🚪 LOGOUT
+        btnLogout.setOnClickListener {
+            prefManager.logout()
+
+            // kembali ke login
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
     }
 }
