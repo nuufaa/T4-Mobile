@@ -1,66 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    card_view:cardCornerRadius="16dp"
-    card_view:cardElevation="6dp">
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:gravity="center_vertical">
 
-        <!-- Avatar -->
         <TextView
             android:id="@+id/tvAvatar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:gravity="center"
-            android:text="A"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="16sp"
-            android:background="#3F51B5"/>
+            android:textSize="18sp"
+            android:background="@drawable/bg_avatar_pink" />
 
-        <!-- Info -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginStart="12dp">
+            android:layout_marginStart="16dp">
 
-            <TextView
-                android:id="@+id/tvName"
-                android:text="Nama"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#222"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nama Mahasiswa"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="#333333"/>
+
+                <TextView
+                    android:id="@+id/btnEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textColor="@color/pink_primary"
+                    android:background="@drawable/bg_btn_action_pink"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Del"
+                    android:textColor="#FF5252"
+                    android:background="@drawable/bg_btn_action_red"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvNim"
-                android:text="NIM"
-                android:textSize="14sp"
-                android:textColor="#666"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="2024001"
+                android:textSize="14sp"
+                android:textColor="#888888"
+                android:layout_marginTop="2dp"/>
 
             <TextView
                 android:id="@+id/tvProdi"
-                android:text="Prodi"
-                android:textSize="14sp"
-                android:textColor="#666"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
+                android:layout_height="wrap_content"
+                android:visibility="gone" /> </LinearLayout>
     </LinearLayout>
-
 </androidx.cardview.widget.CardView>
