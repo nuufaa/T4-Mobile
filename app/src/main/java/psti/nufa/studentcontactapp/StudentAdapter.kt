@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import psti.nufa.studentcontactapp.database.entity.StudentEntity
+import kotlin.math.abs
 
 class StudentAdapter(
     private val onEditClick: (StudentEntity) -> Unit,
     private val onItemClick: (StudentEntity) -> Unit,
     private val onDeleteClick: (StudentEntity) -> Unit
-) :
-    ListAdapter<StudentEntity, StudentAdapter.StudentViewHolder>(DiffCallback()) {
+) : ListAdapter<StudentEntity, StudentAdapter.StudentViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -24,12 +24,7 @@ class StudentAdapter(
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         val student = getItem(position)
-        holder.bind(student)
-        holder.itemView.setOnClickListener { onItemClick(student) }
-        holder.itemView.setOnLongClickListener {
-            onEditClick(student)
-            true
-        }
+        holder.bind(student, onEditClick, onDeleteClick, onItemClick)
     }
 
     fun getStudentAt(position: Int): StudentEntity {
@@ -37,45 +32,42 @@ class StudentAdapter(
     }
 
     class StudentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         private val tvAvatar: TextView = itemView.findViewById(R.id.tvAvatar)
         private val tvName: TextView = itemView.findViewById(R.id.tvName)
         private val tvNim: TextView = itemView.findViewById(R.id.tvNim)
         private val tvProdi: TextView = itemView.findViewById(R.id.tvProdi)
+        private val btnEdit: TextView = itemView.findViewById(R.id.btnEdit)
+        private val btnDelete: TextView = itemView.findViewById(R.id.btnDelete)
 
-        fun bind(student: StudentEntity) {
-
+        fun bind(
+            student: StudentEntity,
+            onEdit: (StudentEntity) -> Unit,
+            onDelete: (StudentEntity) -> Unit,
+            onItemClick: (StudentEntity) -> Unit
+        ) {
             tvName.text = student.name
             tvNim.text = "NIM: ${student.nim}"
             tvProdi.text = "Prodi: ${student.prodi}"
+            tvAvatar.text = student.name.take(1).uppercase()
 
-            // ambil inisial nama
-            val initials = student.name
-                .split(" ")
-                .take(2)
-                .joinToString("") { it.first().toString() }
-                .uppercase()
+            val pinkColors = intArrayOf(
+                0xFFF48FB1.toInt(),
+                0xFFC48B9F.toInt(),
+                0xFFF06292.toInt(),
+                0xFFF8BBD0.toInt()
+            )
 
-            tvAvatar.text = initials
+            val color = pinkColors[abs(student.id % pinkColors.size)]
+            tvAvatar.background?.setTint(color)
 
-            // warna avatar (lebih stabil pakai id)
-            val color = when (student.id % 3) {
-                0 -> 0xFF3F51B5.toInt()
-                1 -> 0xFFE91E63.toInt()
-                else -> 0xFF009688.toInt()
-            }
-
-            tvAvatar.setBackgroundColor(color)
+            itemView.setOnClickListener { onItemClick(student) }
+            btnEdit.setOnClickListener { onEdit(student) }
+            btnDelete.setOnClickListener { onDelete(student) }
         }
     }
 
     class DiffCallback : DiffUtil.ItemCallback<StudentEntity>() {
-        override fun areItemsTheSame(oldItem: StudentEntity, newItem: StudentEntity): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: StudentEntity, newItem: StudentEntity): Boolean {
-            return oldItem == newItem
-        }
+        override fun areItemsTheSame(oldItem: StudentEntity, newItem: StudentEntity) = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: StudentEntity, newItem: StudentEntity) = oldItem == newItem
     }
 }

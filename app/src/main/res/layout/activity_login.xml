@@ -1,47 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center">
+    android:padding="32dp"
+    android:gravity="center"
+    android:background="@color/pink_light">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_graduation_cap"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="Logo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:textSize="32sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
+        android:textColor="@color/pink_dark"
+        android:layout_marginBottom="24dp"/>
 
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:hint="Username"
-        android:inputType="text"
-        android:layout_marginBottom="12dp" />
+        android:paddingStart="16dp"
+        android:background="@drawable/bg_input_pink"
+        android:layout_marginBottom="16dp"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_marginBottom="12dp" />
+        android:paddingStart="16dp"
+        android:background="@drawable/bg_input_pink"
+        android:layout_marginBottom="12dp"
+        android:inputType="textPassword" />
 
     <CheckBox
         android:id="@+id/cbRememberMe"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Remember Me"
+        android:buttonTint="@color/pink_primary"
+        android:textColor="@color/gray_text"
         android:layout_marginBottom="24dp" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login" />
+        android:layout_height="55dp"
+        android:text="LOGIN"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/pink_primary"
+        android:textColor="@color/white" />
 
 </LinearLayout>

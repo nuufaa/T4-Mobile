@@ -1,18 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="20dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/pink_light">
 
-    <EditText android:id="@+id/etName" android:hint="Nama"/>
-    <EditText android:id="@+id/etNim" android:hint="NIM"/>
-    <EditText android:id="@+id/etEmail" android:hint="Email"/>
-    <EditText android:id="@+id/etProdi" android:hint="Prodi"/>
-    <EditText android:id="@+id/etSemester" android:hint="Semester" android:inputType="number"/>
-
-    <Button
-        android:id="@+id/btnSave"
-        android:text="Simpan"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="80dp"
+        app:cardBackgroundColor="@color/pink_primary"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_back_white"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tvFormTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Tambah Mahasiswa"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/bg_input_pink"
+                android:hint="Nama"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/etNim"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/bg_input_pink"
+                android:hint="NIM"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                android:inputType="number" />
+
+            <Spinner
+                android:id="@+id/spinnerProdi"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/bg_input_pink"
+                android:layout_marginBottom="16dp"
+                android:paddingHorizontal="12dp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/bg_input_pink"
+                android:hint="Email"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/etSemester"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/bg_input_pink"
+                android:hint="Semester"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="24dp"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:backgroundTint="@color/pink_primary"
+                android:text="SIMPAN"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
